@@ -12,8 +12,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # For LXC. VirtualBox hosts use a different box, described below.
   config.vm.box = "fgrehm/trusty64-lxc"
 
+
+  #config.vm.network "public_network", :bridge => "eth0", ip: "192.168.1.20", :netmask => "255.255.255.0", auto_config: false
+  #config.vm.network :private_network, ip: "192.168.1.20", :netmask => "255.255.255.0", auto_config: false
+
+  # Create a public network
+  config.vm.network :public_network
+
   # The Zulip development environment runs on 9991 on the guest.
-  config.vm.network "forwarded_port", guest: 9991, host: 9991, host_ip: "127.0.0.1"
+  #config.vm.network "forwarded_port", guest: 9991, host: 9991, host_ip: "192.168.1.10"
+  #config.vm.network "forwarded_port", guest: 9991, host: 9991
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder ".", "/srv/zulip"
